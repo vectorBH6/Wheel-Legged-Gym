@@ -1,0 +1,7 @@
+Sep18_14-20-08_   长方基座 + 轮子拉宽    小改reward   （初次导入）
+            
+Sep18_14-33-06_   tracking_ang_vel_enhance = 0.7
+
+Sep18_15-14-32_   小改obs_scales，但是好像没有用
+
+这个版本会一直旋转保持平衡
