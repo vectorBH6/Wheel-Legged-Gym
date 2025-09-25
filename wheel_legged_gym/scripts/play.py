@@ -99,19 +99,27 @@ def play(args):
     img_idx = 0
     latent = None
 
-    CoM_offset_compensate = True
+    CoM_offset_compensate = False
     vel_err_intergral = torch.zeros(env.num_envs, device=env.device)
     vel_cmd = torch.zeros(env.num_envs, device=env.device)
 
-    for i in range(1000 * int(env.max_episode_length)):
+    cmd_ranges = env_cfg.commands.ranges
+    command_update_interval = int(5.0 / env.dt)  # 每5秒更新命令（步数）
+
+    for i in range(5000 * int(env.max_episode_length)):
         if ppo_runner.alg.actor_critic.is_sequence:
             actions, latent = policy(obs, obs_history)
         else:
             actions = policy(obs.detach())
 
-        env.commands[:, 0] = 2.5
-        env.commands[:, 2] = 0.18  # + 0.07 * np.sin(i * 0.01)
-        env.commands[:, 3] = 0
+        if i % command_update_interval == 0:
+            current_lin_vel_cmd = np.random.uniform(cmd_ranges.lin_vel_x[0], cmd_ranges.lin_vel_x[1])
+            current_height_cmd = np.random.uniform(cmd_ranges.height[0], cmd_ranges.height[1])
+            current_yaw_cmd = np.random.uniform(cmd_ranges.ang_vel_yaw[0], cmd_ranges.ang_vel_yaw[1])
+
+        env.commands[:, 0] = current_lin_vel_cmd 
+        env.commands[:, 1] = current_yaw_cmd     
+        env.commands[:, 2] = current_height_cmd   
 
         if CoM_offset_compensate:
             if i > 200 and i < 600:

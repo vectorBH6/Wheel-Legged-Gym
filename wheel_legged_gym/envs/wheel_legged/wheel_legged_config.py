@@ -36,6 +36,9 @@ from wheel_legged_gym.envs.base.legged_robot_config import (
 
 class WheelLeggedCfg(LeggedRobotCfg):
 
+    class env(LeggedRobotCfg.env):
+        num_envs = 4096
+
     class init_state(LeggedRobotCfg.init_state):
         pos = [0.0, 0.0, 0.25]  # x,y,z [m]
         default_joint_angles = {  # target angles when action = 0.0
@@ -70,3 +73,10 @@ class WheelLeggedCfgPPO(LeggedRobotCfgPPO):
     class runner(LeggedRobotCfgPPO.runner):
         # logging
         experiment_name = "wheel_legged"
+
+    class runner(LeggedRobotCfgPPO.runner):
+        max_iterations = 2000     
+        experiment_name = "wheel_legged"
+        resume = False
+        load_run = "Sep13_17-42-10_"  # 指定要加载的训练文件夹
+        checkpoint = 900  # 指定要加载的模型iteration数

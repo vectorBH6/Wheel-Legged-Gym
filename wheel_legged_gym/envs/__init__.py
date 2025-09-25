@@ -30,6 +30,7 @@
 
 from wheel_legged_gym import WHEEL_LEGGED_GYM_ROOT_DIR, WHEEL_LEGGED_GYM_ENVS_DIR
 from .base.legged_robot import LeggedRobot
+from .wheel_legged.wheel_legged import WheelLegged
 from .wheel_legged.wheel_legged_config import WheelLeggedCfg, WheelLeggedCfgPPO
 from .wheel_legged_vmc.wheel_legged_vmc import LeggedRobotVMC
 from .wheel_legged_vmc.wheel_legged_vmc_config import (
@@ -40,6 +41,10 @@ from .wheel_legged_vmc_flat.wheel_legged_vmc_flat_config import (
     WheelLeggedVMCFlatCfg,
     WheelLeggedVMCFlatCfgPPO,
 )
+from .sf_robot.sf_robot import SFRobot
+from .sf_robot.sf_robot_config import SFRobotCfg, SFRobotCfgPPO
+from .diablo.diablo import Diablo
+from .diablo.diablo_config import DiabloCfg, DiabloCfgPPO
 
 
 import os
@@ -47,7 +52,7 @@ import os
 from wheel_legged_gym.utils.task_registry import task_registry
 
 task_registry.register(
-    "wheel_legged", LeggedRobot, WheelLeggedCfg(), WheelLeggedCfgPPO()
+    "wheel_legged", WheelLegged, WheelLeggedCfg(), WheelLeggedCfgPPO()
 )
 task_registry.register(
     "wheel_legged_vmc", LeggedRobotVMC, WheelLeggedVMCCfg(), WheelLeggedVMCCfgPPO()
@@ -57,4 +62,11 @@ task_registry.register(
     LeggedRobotVMC,
     WheelLeggedVMCFlatCfg(),
     WheelLeggedVMCFlatCfgPPO(),
+)
+task_registry.register(
+    "sf_robot", SFRobot, SFRobotCfg(), SFRobotCfgPPO()
+)
+
+task_registry.register(
+    "diablo", Diablo, DiabloCfg(), DiabloCfgPPO()
 )

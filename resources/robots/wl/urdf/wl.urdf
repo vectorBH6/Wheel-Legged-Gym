@@ -53,7 +53,7 @@
         <child link="lf0_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit lower="-0.3363" upper="1.3479" effort="30" velocity="1000" />
+        <limit lower="-0.3363" upper="1.3479" effort="30" velocity="30" />
     </joint>
     <link name="lf1_Link">
         <inertial>
@@ -83,7 +83,7 @@
         <child link="lf1_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit lower="-1.0" upper="1.25" effort="30" velocity="1000" />
+        <limit lower="-1.0" upper="1.25" effort="30" velocity="30" />
     </joint>
     <link name="l_wheel_Link">
         <inertial>
@@ -113,7 +113,7 @@
         <child link="l_wheel_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit effort="5" velocity="1000" />
+        <limit effort="5" velocity="300" />
     </joint>
     <link name="rf0_Link">
         <inertial>
@@ -143,7 +143,7 @@
         <child link="rf0_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit lower="-1.3479" upper="0.3363" effort="30" velocity="1000" />
+        <limit lower="-1.3479" upper="0.3363" effort="30" velocity="30" />
     </joint>
     <link name="rf1_Link">
         <inertial>
@@ -173,7 +173,7 @@
         <child link="rf1_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit lower="-1.25" upper="1.0" effort="30" velocity="1000" />
+        <limit lower="-1.25" upper="1.0" effort="30" velocity="30" />
     </joint>
     <link name="r_wheel_Link">
         <inertial>
@@ -203,6 +203,6 @@
         <child link="r_wheel_Link" />
         <axis xyz="0 0 1" />
         <dynamics damping="0" friction="0"/>
-        <limit effort="5" velocity="1000" />
+        <limit effort="5" velocity="300" />
     </joint>
 </robot>
