@@ -1,7 +1,0 @@
-play1.py直接用键盘控制
-
-
-play.py随机命令
-
-
-测试前需要把heading_command = False

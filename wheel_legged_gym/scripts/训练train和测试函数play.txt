@@ -1,0 +1,20 @@
+python wheel_legged_gym/scripts/train.py --task=sf_robot    
+(wheel_legged_gym/envs/sf_robot(配置文件代码，根据需要修改)){
+    class runner(LeggedRobotCfgPPO.runner):
+        max_iterations = 5000     
+        experiment_name = "sf_robot"
+        resume = True
+        load_run = "Sep20_13-34-18_"  # 指定要加载的训练文件夹
+        checkpoint = 100  # 指定要加载的模型iteration数 (建议从这个预训练模型开始训（只对sf机器人）)
+}
+
+
+play1.py直接用键盘控制
+python wheel_legged_gym/scripts/play1.py --task=sf_robot
+
+
+play.py随机命令
+python wheel_legged_gym/scripts/play.py --task=sf_robot
+
+
+测试前需要把heading_command = False
