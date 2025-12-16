@@ -1,0 +1,12 @@
+class sim: dt = 0.01
+
+decimation = 1
+
+stiffness = {"T": 0.45, "C": 0.45, "W": 0}  # [N*m/rad] T:大腿, C:小腿, W:轮子
+damping = {"T": 0.0075, "C": 0.0075, "W": 0.003}  # [N*m*s/rad]
+
+
+delay_ms_range = [0, 10]
+
+
+低频控制和延迟

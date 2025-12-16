@@ -37,7 +37,7 @@ from wheel_legged_gym.envs.base.legged_robot_config import (
 class WheelLeggedCfg(LeggedRobotCfg):
 
     class env(LeggedRobotCfg.env):
-        num_envs = 4096
+        num_envs = 1024
 
     class init_state(LeggedRobotCfg.init_state):
         pos = [0.0, 0.0, 0.25]  # x,y,z [m]
@@ -73,10 +73,7 @@ class WheelLeggedCfgPPO(LeggedRobotCfgPPO):
     class runner(LeggedRobotCfgPPO.runner):
         # logging
         experiment_name = "wheel_legged"
-
-    class runner(LeggedRobotCfgPPO.runner):
-        max_iterations = 2000     
-        experiment_name = "wheel_legged"
+        max_iterations = 3000     
         resume = False
         load_run = "Sep13_17-42-10_"  # 指定要加载的训练文件夹
         checkpoint = 900  # 指定要加载的模型iteration数

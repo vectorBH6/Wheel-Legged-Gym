@@ -1,0 +1,17 @@
+load_run = "Oct10_16-50-35_"  # 指定要加载的训练文件夹
+        checkpoint = 1500  # 指定要加载的模型iteration数
+
+decimation = 4
+
+# 舵机关节积分增益（仅用于舵机PID控制）
+        leg_integral_gain = 0.1  # [N*m/(rad*s)] 舵机积分增益
+        integral_windup_limit = 1.0  # 积分饱和限制 [rad*s]
+
+# 动作延迟随机化
+        randomize_action_delay = True
+        delay_ms_range = [0, 10]
+
+tracking_sigma = 0.10  # tracking reward = exp(-error^2/sigma)
+
+提高鲁棒性，不过静止状态下好像还会动，有可能是轮子的控制（其实是舵机的d值控制问题）
+

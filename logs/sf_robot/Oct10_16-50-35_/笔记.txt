@@ -1,0 +1,6 @@
+减小self.cfg.control.pos_action_scale
+
+改了 dof_pos_obs_modified = self.actions * self.cfg.control.pos_action_scale * 0.5 （有可能是输入神经网络过大，所以乘上0.5）
+
+效果不错，可以开始更严谨的lin和ang track
+

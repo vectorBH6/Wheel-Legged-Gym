@@ -1,3 +1,0 @@
-/home/rvector/Wheel-Legged-Gym/sim2real/build/CMakeFiles/sim2real_sf.dir
-/home/rvector/Wheel-Legged-Gym/sim2real/build/CMakeFiles/edit_cache.dir
-/home/rvector/Wheel-Legged-Gym/sim2real/build/CMakeFiles/rebuild_cache.dir

@@ -246,6 +246,10 @@ def export_policy_as_jit(actor_critic, path):
         # assumes LSTM: TODO add GRU
         exporter = PolicyExporterLSTM(actor_critic)
         exporter.export(path)
+    elif hasattr(actor_critic, "is_sequence") and actor_critic.is_sequence:
+        # ActorCriticSequence: export encoder + actor together
+        exporter = PolicyExporterSequence(actor_critic)
+        exporter.export(path)
     else:
         os.makedirs(path, exist_ok=True)
         path = os.path.join(path, "policy_1.pt")
@@ -287,3 +291,34 @@ class PolicyExporterLSTM(torch.nn.Module):
         self.to("cpu")
         traced_script_module = torch.jit.script(self)
         traced_script_module.save(path)
+
+
+class PolicyExporterSequence(torch.nn.Module):
+    """
+    Policy exporter for ActorCriticSequence.
+    Exports encoder + actor as a single inference module.
+    """
+    def __init__(self, actor_critic):
+        super().__init__()
+        self.encoder = copy.deepcopy(actor_critic.encoder)
+        self.actor = copy.deepcopy(actor_critic.actor)
+        
+    def forward(self, observations, observation_history):
+        """
+        Args:
+            observations: Current observations [batch, num_obs] e.g. [1, 27]
+            observation_history: Flattened history [batch, history_len*num_obs] e.g. [1, 135]
+        Returns:
+            actions: Action outputs [batch, num_actions] e.g. [1, 6]
+        """
+        latent = self.encoder(observation_history)
+        actions = self.actor(torch.cat((observations, latent), dim=-1))
+        return actions
+    
+    def export(self, path):
+        os.makedirs(path, exist_ok=True)
+        path = os.path.join(path, "policy_1.pt")
+        self.to("cpu")
+        traced_script_module = torch.jit.script(self)
+        traced_script_module.save(path)
+        print(f"✓ Exported ActorCriticSequence policy to: {path}")

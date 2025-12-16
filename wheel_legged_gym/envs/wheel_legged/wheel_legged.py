@@ -56,8 +56,10 @@ class WheelLegged(LeggedRobot):
         
         # 对于轮子关节，将位置观测设为0
         dof_pos_obs_modified = dof_pos_obs.clone()
+        # dof_pos_obs_modified[:, self.wheel_joint_indices] = 0.0
+        # dof_pos_obs_modified = self.actions * self.cfg.control.pos_action_scale
         dof_pos_obs_modified[:, self.wheel_joint_indices] = 0.0
-        
+
         # 对于舵机关节，将速度观测设为0
         dof_vel_obs_modified = dof_vel_obs.clone()
         dof_vel_obs_modified[:, self.leg_joint_indices] = 0.0
